@@ -5,7 +5,7 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    docker.build("nodejs-portfolio:${env.BUILD_NUMBER}")
+                    docker.build("nodejs-api:${env.BUILD_NUMBER}")
                 }
             }
         }
@@ -13,7 +13,7 @@ pipeline {
         stage('Test') {
             steps {
                 script {
-                    docker.image("nodejs-portfolio:${env.BUILD_NUMBER}").inside {
+                    docker.image("nodejs-api:${env.BUILD_NUMBER}").inside {
                         sh 'npm install'
                         sh 'node test.js'
                     }

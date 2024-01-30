@@ -6,7 +6,7 @@ pipeline {
             steps {
                 script {
                     //dockerapp = docker.build("alexmbarbosa/node-dockgen:latest")
-                    /usr/bin/docker build -t alexmbarbosa/node-dockgen:v1 .
+                    /usr/bin/docker build -t "alexmbarbosa/node-dockgen:v1" .
                 }
             }
         }

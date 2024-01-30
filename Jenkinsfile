@@ -5,7 +5,7 @@ pipeline {
         stage("Docker Build Image") {
             steps {
                 script {
-                    docker.build("alexmbarbosa/node-dockgen:latest")
+                    dockerapp = docker.build("alexmbarbosa/node-dockgen:latest")
                 }
             }
         }

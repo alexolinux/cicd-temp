@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: node-dockgen
-        image: ${DOCKER_USERNAME}/node-dockgen:${BUILD_NUMBER}
+        image: alexmbarbosa/node-dockgen:latest
         resources:
           requests:
             memory: "64Mi"

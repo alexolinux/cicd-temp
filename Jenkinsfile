@@ -2,42 +2,30 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
+        stage("Docker Build Image") {
             steps {
-                // Check out the source code from GitHub
-                checkout scm
+                sh 'echo "Build Docker Image..."'
+                //sh 'docker build -t "alexmbarbosa/node-dockgen:latest" .'
             }
         }
 
-        stage('Build') {
+        stage('Docker Push Image') {
             steps {
                 script {
-                    // Set up Node.js environment
-                    tool 'node-dockgen'
-                    
-                    // Build Docker image
-                    sh 'docker build -t ${DOCKER_IMAGE}:${DOCKER_TAG} .'
-                }
-            }
-        }
-
-        stage('Push Registry') {
-            steps {
-                script {
-                    // Push Docker image to a container registry
-                    sh 'docker push ${DOCKER_IMAGE}:${DOCKER_TAG}'
+                    sh 'echo "Pushing Docker Image..."'
+                    //sh 'docker push "alexmbarbosa/node-dockgen:latest"'                    
                 }
             }
         }
 
         stage('Kube Deploy') {
             steps {
-                script {
-                    // Deploy to Kubernetes using kubectl
-                    withKubeConfig([credentialsId: 'kubeconfig-credentials-id', serverUrl: 'kube-api-server-url']) {
-                        sh 'kubectl apply -f kubernetes/deployment.yaml'
-                    }
-                }
+                sh 'echo "Kubernetes Deployment..."'
+                //script {
+                    //withKubeConfig([credentialsId: 'kubeconfig-credentials-id', serverUrl: 'kube-api-server-url']) {
+                    //    sh 'kubectl apply -f kubernetes/deployment.yaml'
+                    //}
+                //}
             }
         }
     }

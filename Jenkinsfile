@@ -4,8 +4,9 @@ pipeline {
     stages {
         stage("Docker Build Image") {
             steps {
-                sh 'echo "Build Docker Image..."'
-                //sh 'docker build -t "alexmbarbosa/node-dockgen:latest" .'
+                script {
+                    docker.build("alexmbarbosa/node-dockgen:latest")
+                }
             }
         }
 
